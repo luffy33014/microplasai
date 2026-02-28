@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microplastic Detection AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="main-header">
+            <div class="logo">
+                <i class="fa-solid fa-water"></i>
+                <span>MicroPlastAI</span>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}"
+                    class="{{ 'active' if request.endpoint in ['index', 'analyze'] else '' }}">Analyze</a>
+                <a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint == 'about' else '' }}">About</a>
+                <a href="#">Github</a>
+            </nav>
+        </header>
+
+        <main class="content-wrapper">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="main-footer">
+            <p>&copy; 2026 AI Microplastic Detection System. Powered by YOLOv11 & OpenCV.</p>
+        </footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
