@@ -233,3 +233,89 @@ nav a.active {
     border-top: 1px solid var(--border-color);
     margin-top: auto;
 }
+/* Microscope Camera Interface */
+.microscope-action {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.divider {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    position: relative;
+    width: 100%;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: var(--border-color);
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.microscope-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgba(6, 182, 212, 0.1);
+    border-color: rgba(6, 182, 212, 0.3);
+    color: #06b6d4;
+    transition: all 0.3s ease;
+}
+
+.microscope-btn:hover {
+    background-color: rgba(6, 182, 212, 0.2);
+    border-color: #06b6d4;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
+}
+
+#camera-container {
+    margin-top: 20px;
+    text-align: center;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.camera-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto 20px;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+}
+
+#microscope-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#camera-loading {
+    padding: 30px;
+    color: var(--text-muted);
+}

@@ -11,7 +11,10 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 os.makedirs(app.config['ANNOTATED_FOLDER'], exist_ok=True)
 
-from utils import detect_microplastics
+from processing.detect import detect_microplastics
+import json
+from flask import send_file
+import io
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'tiff', 'bmp'}
@@ -36,17 +39,30 @@ def analyze():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(filepath)
         
-        # Run detection
         results = detect_microplastics(filepath, app.config['ANNOTATED_FOLDER'])
         
         # Add original filename to results for display
         results['original_image'] = filename
         
+        # Store results in session or temporarily for download
+        # A simple hack for download without session is passing it
+        
         return render_template('result.html', **results)
+
 
 @app.route('/about')
 def about():
     return render_template('about.html')
+
+@app.route('/download/<filename>')
+def download(filename):
+    # This route just generates a dummy PDF or text report on the fly
+    # We can use io to send a simple text file
+    report_content = f"Microplastic Analysis Report for {filename}\nContamination check completed.\nPlease view main results on the dashboard."
+    mem = io.BytesIO()
+    mem.write(report_content.encode('utf-8'))
+    mem.seek(0)
+    return send_file(mem, as_attachment=True, download_name=f"report_{filename}.txt", mimetype='text/plain')
 
 if __name__ == '__main__':
     app.run(debug=True)
