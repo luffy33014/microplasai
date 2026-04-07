@@ -65,4 +65,5 @@ def download(filename):
     return send_file(mem, as_attachment=True, download_name=f"report_{filename}.txt", mimetype='text/plain')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)

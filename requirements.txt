@@ -1,5 +1,9 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 Flask
 opencv-python-headless
 ultralytics
 numpy
 roboflow
+torch
+torchvision
