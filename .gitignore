@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+env/
+venv/
+.env
+
+# Ignore uploaded and generated images
+static/uploads/
+static/annotated/
+uploads/
+
+# Ignore YOLO training runs
+runs/
+
+# Server logs
+server.log
+
+# Datasets
+models/train/
+models/valid/
+models/test/
+models/data.yaml
+models/README.roboflow.txt
