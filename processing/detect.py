@@ -57,9 +57,9 @@ def detect_microplastics(original_image_path, output_folder):
     # Step 1: Preprocess
     preprocessed_path = preprocess_image(original_image_path, output_folder)
 
-    # Step 2: Resize image (VERY IMPORTANT for memory)
+    # Step 2: Resize image (Increased to 800x800 for better range and accuracy)
     img = cv2.imread(preprocessed_path)
-    img = cv2.resize(img, (640, 640))
+    img = cv2.resize(img, (800, 800))
     cv2.imwrite(preprocessed_path, img)
 
     # Step 3: Load model
@@ -75,8 +75,8 @@ def detect_microplastics(original_image_path, output_folder):
 
     if model:
         try:
-            # Step 4: Prediction (NO augment → saves memory)
-            results = model.predict(preprocessed_path, conf=0.25, iou=0.45)
+            # Step 4: Prediction (augment=True for better accuracy, lower conf for better range)
+            results = model.predict(preprocessed_path, conf=0.15, iou=0.45, augment=True, imgsz=800)
 
             for result in results:
                 # Lightweight plotting
