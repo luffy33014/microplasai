@@ -1,13 +1,15 @@
-train: Z:/project/models/train/images
-val: Z:/project/models/valid/images
-test: Z:/project/models/test/images
-
-nc: 1
-names: ['Microplastic']
-
+train: Z:/project/microplastic_detection-1/train/images
+val: Z:/project/microplastic_detection-1/valid/images
+test: Z:/project/microplastic_detection-1/test/images
+nc: 5
+names:
+- Microplastic
+- Algae
+- Organic Debris
+- Dust
+- Sand
 roboflow:
-  workspace: balaji-nfzzu
-  project: microplastic_detection-qmdu5
+  workspace: public-workspaces
+  project: organic-water-contaminants
   version: 1
-  license: CC BY 4.0
-  url: https://app.roboflow.com/balaji-nfzzu/microplastic_detection-qmdu5/1
+  note: This configuration expects the downloaded dataset from download_organic_dataset.py

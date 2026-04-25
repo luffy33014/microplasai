@@ -1,0 +1,12 @@
+names:
+- Microplastic
+nc: 1
+roboflow:
+  license: CC BY 4.0
+  project: microplastic_detection-qmdu5
+  url: https://app.roboflow.com/balaji-nfzzu/microplastic_detection-qmdu5/1
+  version: 1
+  workspace: balaji-nfzzu
+test: ../test/images
+train: ../train/images
+val: ../valid/images

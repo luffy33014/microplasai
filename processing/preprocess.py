@@ -13,8 +13,9 @@ def preprocess_image(image_path, output_folder):
     if img is None:
         return image_path
         
-    # Noise reduction
-    blurred = cv2.GaussianBlur(img, (5, 5), 0)
+    # Noise reduction: Use Bilateral Filter instead of Gaussian Blur
+    # This removes noise while preserving sharp edges, which significantly boosts YOLO detection accuracy.
+    blurred = cv2.bilateralFilter(img, 9, 75, 75)
     
     # Contrast enhancement using CLAHE on L channel of LAB color space
     lab = cv2.cvtColor(blurred, cv2.COLOR_BGR2LAB)

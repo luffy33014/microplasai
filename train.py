@@ -17,10 +17,11 @@ def train_model():
     try:
         results = model.train(
             data=data_path,
-            epochs=150,           # Increased epochs for longer learning
+            epochs=25,            # Set to 25 for full 24-hour training cycle
             imgsz=800,            # Increased image size (crucial for small microplastics)
             plots=True,
-            batch=16,             # Adjust based on GPU memory. If OOM occurs, reduce to 8
+            batch=4,              # Lower batch size to easily clear memory constraints
+
             patience=30,          # Longer early stopping patience
             optimizer='AdamW',    # AdamW optimizer often works better for object detection
             lr0=0.001,            # Initial learning rate

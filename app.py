@@ -56,14 +56,29 @@ def about():
 
 @app.route('/download/<filename>')
 def download(filename):
-    # This route just generates a dummy PDF or text report on the fly
-    # We can use io to send a simple text file
-    report_content = f"Microplastic Analysis Report for {filename}\nContamination check completed.\nPlease view main results on the dashboard."
+    # Retrieve data from temp or just re-run the detection for the report.
+    # For a production app we'd keep this in a session/db. 
+    # Here we simply rerun it to generate the report data fresh.
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    if not os.path.exists(filepath):
+        return "File not found", 404
+        
+    results = detect_microplastics(filepath, app.config['ANNOTATED_FOLDER'])
+    results['original_image'] = filename
+    
+    report_html = render_template('downloadable_report.html', **results)
+    
     mem = io.BytesIO()
-    mem.write(report_content.encode('utf-8'))
+    mem.write(report_html.encode('utf-8'))
     mem.seek(0)
-    return send_file(mem, as_attachment=True, download_name=f"report_{filename}.txt", mimetype='text/plain')
+    return send_file(mem, as_attachment=True, download_name=f"Microplastic_Analysis_Report_{filename}.html", mimetype='text/html')
 
+@app.errorhandler(Exception)
+def handle_exception(e):
+    import traceback
+    with open("error_log.txt", "w") as f:
+        f.write(traceback.format_exc())
+    return f"Internal Server Error! See error_log.txt or ask AI. Details: {str(e)}", 500
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=False)
