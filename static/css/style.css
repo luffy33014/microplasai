@@ -439,3 +439,111 @@ nav a.active {
     padding: 30px;
     color: var(--text-muted);
 }
+
+/* Moving Water Waves */
+.water-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh;
+    min-height: 100px;
+    max-height: 150px;
+    overflow: hidden;
+    z-index: 1; /* Above blobs, below content */
+}
+
+.waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% { transform: translate3d(-90px, 0, 0); }
+    100% { transform: translate3d(85px, 0, 0); }
+}
+
+/* Water Bubbles */
+.bubbles {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -100px;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4), rgba(59, 130, 246, 0.1));
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 20px rgba(255, 255, 255, 0.2),
+        0 0 10px rgba(59, 130, 246, 0.1);
+    backdrop-filter: blur(1px);
+    animation: rise infinite ease-in;
+    opacity: 0;
+}
+
+.bubble:nth-child(1) { left: 10%; width: 20px; height: 20px; animation-duration: 8s; }
+.bubble:nth-child(2) { left: 20%; width: 50px; height: 50px; animation-duration: 11s; animation-delay: 1s; }
+.bubble:nth-child(3) { left: 35%; width: 30px; height: 30px; animation-duration: 7s; animation-delay: 2s; }
+.bubble:nth-child(4) { left: 50%; width: 60px; height: 60px; animation-duration: 12s; animation-delay: 0s; }
+.bubble:nth-child(5) { left: 65%; width: 25px; height: 25px; animation-duration: 6s; animation-delay: 3s; }
+.bubble:nth-child(6) { left: 80%; width: 45px; height: 45px; animation-duration: 9s; animation-delay: 4s; }
+.bubble:nth-child(7) { left: 90%; width: 35px; height: 35px; animation-duration: 10s; animation-delay: 2s; }
+.bubble:nth-child(8) { left: 15%; width: 55px; height: 55px; animation-duration: 13s; animation-delay: 5s; }
+.bubble:nth-child(9) { left: 30%; width: 20px; height: 20px; animation-duration: 7s; animation-delay: 6s; }
+.bubble:nth-child(10){ left: 45%; width: 40px; height: 40px; animation-duration: 10s; animation-delay: 7s; }
+.bubble:nth-child(11){ left: 60%; width: 30px; height: 30px; animation-duration: 8s; animation-delay: 4s; }
+.bubble:nth-child(12){ left: 75%; width: 50px; height: 50px; animation-duration: 11s; animation-delay: 8s; }
+.bubble:nth-child(13){ left: 85%; width: 25px; height: 25px; animation-duration: 6s; animation-delay: 1s; }
+.bubble:nth-child(14){ left: 5%;  width: 45px; height: 45px; animation-duration: 9s; animation-delay: 3s; }
+.bubble:nth-child(15){ left: 95%; width: 35px; height: 35px; animation-duration: 10s; animation-delay: 5s; }
+
+@keyframes rise {
+    0% {
+        bottom: -100px;
+        transform: translateX(0px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(100px);
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        bottom: 110vh;
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+}
